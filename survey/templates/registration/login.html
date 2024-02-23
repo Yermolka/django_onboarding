@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    {% if form.errors %}
+    <p>Неверные данные.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>У вас нет прав на просмотр этой страницы.</p>
+        {% else %}
+            <p>Пожалуйста, войдие для просмотра страницы</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input class="btn btn-success" type="submit" value="Войти">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+{% endblock %}

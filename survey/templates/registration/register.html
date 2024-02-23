@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <table class="table table-bordered">
+        <tr>
+            <td>Имя пользователя: </td>
+            <td><input type="text" class="form-control" name="username" ></td>
+        </tr>
+        <tr>
+            <td>Пароль:</td>
+            <td><input type="password" class="form-control" name="password"></td>
+        </tr>
+    </table>
+    {% for error in errors %}
+        <div class="p-3 mb-2 text-danger-emphasis border border-danger-subtle rounded-3">
+        {{error}}
+        </div>
+    {% endfor %}
+    <input class="btn btn-success" type="submit" value="Зарегистрироваться">
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+{% endblock %}

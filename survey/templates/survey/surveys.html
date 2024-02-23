@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Опросы {% endblock %}
+
+{% block main %}
+
+<p>Привет, {{user.username}}! </p>
+<ul>Доступные опросы:
+{% for survey in surveys %}
+<li><a href="{% url 'survey' survey.id %}">{{survey.name}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}
